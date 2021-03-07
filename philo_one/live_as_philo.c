@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.c                                        :+:      :+:    :+:   */
+/*   live_as_philo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/07 21:18:26 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/03/07 21:45:23 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/03/07 22:19:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int	main (int ac, char **av)
+void take_fork (t_args *args)
 {
-	t_args args;
+	pthread_mutex_lock(&args->forks[args->left_fork]);
 
-	if (ac < 5 || ac > 6)
-		return(print_error("Wrong arguments number\n"));
-	if (!parse_args(&args, av, ac))
-		return(print_error("Invalid arguments\n"));
-	if (!create_mutexes(&args))
-		return (print_error("Mutex creation failed\n"));
-	if (!create_threads(args))
-		return (print_error("Mutex creation failed\n"));
 }
+
+void printer(t_args *args, int c)
+{
+
+	pthread_mutex_lock(&args->philos->who_write);
+	print_time;
+	print_index;
+	print_status;
+	timestamp_in_ms X has taken a fork
+	pthread_mutex_unlock(&args->philos->who_write);
+}
+
+

@@ -21,7 +21,7 @@ INC		= -Iincludes/
 OBJS	= $(SRCS:%.c=%.o)
 
 
-SRCS	= philo_one.c
+SRCS	= philo_one.c init.c utils.c threads.c live_as_philo.c printer.c
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
