@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 19:03:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 21:11:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int parse_args(t_args *args, char **av, int ac)
 		args->philos[i].eat_counter = 0;
 		args->philos[i].left_fork = i;
 		args->philos[i].right_fork = (i + 1) % args->num_of_philos;
+		args->philos[i].args = args;
 		i++;
 	}
 	return (1);

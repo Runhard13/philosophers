@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 18:45:25 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 20:54:13 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int print_error (char *text)
 	return (0);
 }
 
-void print_time(t_args *args)
+void print_time(t_philo *philos)
 {
 	char *time_stamp;
 
-	time_stamp = ft_itoa((get_time() - args->t_start));
+	time_stamp = NULL;
+	time_stamp = ft_itoa((get_time() - philos->args->t_start));
 	write(1, time_stamp, ft_strlen(time_stamp));
+	free(time_stamp);
 }
 
 void print_action(int c)
@@ -40,17 +42,17 @@ void print_action(int c)
 		write(1, "is thinking\n", 12);
 }
 
-void printer(t_args *args, int c)
+void printer(t_philo *philos, int c)
 {
 	char *index;
 
-	pthread_mutex_lock(&args->who_write);
-	index = ft_itoa(args->philos->index + 1);
-	print_time(args);
+	pthread_mutex_lock(&philos->args->who_write);
+	index = ft_itoa(philos->index + 1);
+	print_time(philos);
 	write(1, " ", 1);
 	write(1, index, ft_strlen(index));
 	write(1, " ", 1);
 	print_action(c);
 	free(index);
-	pthread_mutex_unlock(&args->who_write);
+	pthread_mutex_unlock(&philos->args->who_write);
 }

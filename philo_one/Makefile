@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 
-args: $(NAME)
+all: $(NAME) clean
 
 clean:
 	rm -f $(OBJS)
@@ -35,6 +35,6 @@ clean:
 fclean: clean
 	rm -f ${NAME}
 
-re: fclean args
+re: fclean all
 
 .PHONY: args clean fclean re

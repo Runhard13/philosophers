@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 18:46:52 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 21:03:08 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@
 
 void *philo_routine (void *args)
 {
+	t_philo *philos;
+
+	philos = (t_philo*)args;
+
 	while (1)
 	{
-		take_fork(args);
-		eat(args);
-		sleeping(args);
-		thinking(args);
+		take_fork(philos);
+		eat(philos);
+		sleeping(philos);
+		thinking(philos);
 	}
 	return (NULL);
 }

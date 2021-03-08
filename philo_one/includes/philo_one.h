@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 19:06:05 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 21:11:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define DIED 4
 #define FORK 5
 
+struct s_args;
 typedef struct		s_philo
 {
 	int				index;
@@ -33,8 +34,7 @@ typedef struct		s_philo
 	int 			left_fork;
 	int 			right_fork;
 	long 			death;
-
-
+	struct s_args	*args;
 }					t_philo;
 
 typedef struct		s_args
@@ -61,11 +61,11 @@ int					ft_atoi(const char *str);
 int					print_error(char *text);
 int					create_threads(t_args *args);
 char				*ft_itoa(long n);
-void				printer(t_args *args, int c);
-void				take_fork(t_args *args);
-void				sleeping(t_args *args);
-void				thinking(t_args *args);
-void				eat(t_args *args);
+void				printer(t_philo *philos, int c);
+void				take_fork(t_philo *philos);
+void				sleeping(t_philo *philos);
+void				thinking(t_philo *philos);
+void				eat(t_philo *philos);
 
 
 
