@@ -55,6 +55,10 @@ int parse_args(t_args *args, char **av, int ac)
 		args->philos[i].left_fork = i;
 		args->philos[i].right_fork = (i + 1) % args->num_of_philos;
 		args->philos[i].args = args;
+		args->philos[i].eating = 0;
+		pthread_mutex_init(&args->philos[i].eat_or_die, NULL);
+		pthread_mutex_init(&args->philos[i].eat_mutex, NULL);
+		pthread_mutex_lock(&args->philos[i].eat_mutex);
 		i++;
 	}
 	return (1);
@@ -71,8 +75,8 @@ int create_mutexes(t_args *args)
 		pthread_mutex_init(&args->forks[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(&args->waiting_for_death, NULL);
-	pthread_mutex_lock(&args->waiting_for_death);
+	pthread_mutex_init(&args->waiting_for_end, NULL);
+	pthread_mutex_lock(&args->waiting_for_end);
 	pthread_mutex_init(&args->write_mutex, NULL);
 	return (1);
 }

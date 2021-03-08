@@ -36,9 +36,14 @@ void thinking(t_philo *philos)
 
 void eat(t_philo *philos)
 {
+	pthread_mutex_lock(&philos->eat_or_die);
+	philos->eating = 1;
 	philos->last_eat = get_time();
 	philos->death = philos->args->t_to_die + philos->last_eat;
 	printer(philos, EATING);
 	usleep(philos->args->t_to_eat * 1000);
+	philos->eating = 0;
 	philos->eat_counter++;
+	pthread_mutex_unlock(&philos->eat_or_die);
+	pthread_mutex_unlock(&philos->eat_mutex);
 }

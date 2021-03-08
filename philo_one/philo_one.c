@@ -25,8 +25,8 @@ int	main (int ac, char **av)
 		return (print_error("Mutex creation failed\n"));
 	if (!create_threads(&args))
 		return (print_error("Mutex creation failed\n"));
-	pthread_mutex_lock(&args.waiting_for_death);
-	pthread_mutex_unlock(&args.waiting_for_death);
+	pthread_mutex_lock(&args.waiting_for_end);
+	pthread_mutex_unlock(&args.waiting_for_end);
 	return (0);
 
 }

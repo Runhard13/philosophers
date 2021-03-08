@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 20:54:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 00:47:30 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void print_action(int c)
 		write(1, "is died\n", 8);
 	else if (c == THINKING)
 		write(1, "is thinking\n", 12);
+	else if (c == FED)
+		write(1, "All philopohers fed\n", 20);
+
 }
 
 void printer(t_philo *philos, int c)
@@ -49,8 +52,9 @@ void printer(t_philo *philos, int c)
 	pthread_mutex_lock(&philos->args->write_mutex);
 	index = ft_itoa(philos->index + 1);
 	print_time(philos);
-	write(1, "    ", 1);
-	write(1, index, ft_strlen(index));
+	write(1, "   ", 3);
+	if (c != FED)
+		write(1, index, ft_strlen(index));
 	write(1, " ", 1);
 	print_action(c);
 	free(index);

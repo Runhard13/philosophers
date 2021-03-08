@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 22:31:03 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 00:24:23 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,20 @@
 #define SLEEPING 3
 #define DIED 4
 #define FORK 5
+#define FED 6
 
 struct s_args;
 typedef struct		s_philo
 {
 	int				index;
+	int 			eating;
 	int 			eat_counter;
+	long 			death;
 	long 			last_eat;
 	int 			left_fork;
 	int 			right_fork;
-	long 			death;
+	pthread_mutex_t eat_or_die;
+	pthread_mutex_t eat_mutex;
 	struct s_args	*args;
 }					t_philo;
 
@@ -47,7 +51,7 @@ typedef struct		s_args
 	pthread_mutex_t	*forks;
 	long 			t_start;
 	pthread_mutex_t	write_mutex;
-	pthread_mutex_t	waiting_for_death;
+	pthread_mutex_t	waiting_for_end;
 	t_philo			*philos;
 }					t_args;
 
@@ -66,7 +70,6 @@ void				take_fork(t_philo *philos);
 void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
-void 				waiting_for_death();
 
 
 
