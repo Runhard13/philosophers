@@ -55,12 +55,14 @@ char		*ft_itoa(long n)
 {
 	int		len;
 	char	*str;
+	long	another_n;
 
 	len = 0;
-	while (n)
+	another_n = n;
+	while (another_n)
 	{
 		len++;
-		n /= 10;
+		another_n /= 10;
 	}
 	if (!(str = malloc((len + 1))))
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 21:11:45 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:31:03 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct		s_args
 	int				num_must_eat;
 	pthread_mutex_t	*forks;
 	long 			t_start;
-	pthread_mutex_t	who_write;
-	pthread_mutex_t	who_dead;
+	pthread_mutex_t	write_mutex;
+	pthread_mutex_t	waiting_for_death;
 	t_philo			*philos;
 }					t_args;
 
@@ -66,6 +66,7 @@ void				take_fork(t_philo *philos);
 void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
+void 				waiting_for_death();
 
 
 

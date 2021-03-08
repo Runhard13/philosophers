@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:45:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 21:13:40 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:00:49 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ void eat(t_philo *philos)
 	printer(philos, EATING);
 	usleep(philos->args->t_to_eat * 1000);
 	philos->eat_counter++;
-
 }

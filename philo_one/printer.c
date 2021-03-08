@@ -46,13 +46,13 @@ void printer(t_philo *philos, int c)
 {
 	char *index;
 
-	pthread_mutex_lock(&philos->args->who_write);
+	pthread_mutex_lock(&philos->args->write_mutex);
 	index = ft_itoa(philos->index + 1);
 	print_time(philos);
-	write(1, " ", 1);
+	write(1, "    ", 1);
 	write(1, index, ft_strlen(index));
 	write(1, " ", 1);
 	print_action(c);
 	free(index);
-	pthread_mutex_unlock(&philos->args->who_write);
+	pthread_mutex_unlock(&philos->args->write_mutex);
 }

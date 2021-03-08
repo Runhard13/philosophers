@@ -6,11 +6,12 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 20:43:12 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 22:29:56 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
 
 int	main (int ac, char **av)
 {
@@ -24,7 +25,8 @@ int	main (int ac, char **av)
 		return (print_error("Mutex creation failed\n"));
 	if (!create_threads(&args))
 		return (print_error("Mutex creation failed\n"));
-
+	pthread_mutex_lock(&args.waiting_for_death);
+	pthread_mutex_unlock(&args.waiting_for_death);
 	return (0);
 
 }

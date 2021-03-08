@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 21:03:08 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 21:39:56 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void *philo_routine (void *args)
 		sleeping(philos);
 		thinking(philos);
 	}
-	return (NULL);
 }
 
 int create_threads(t_args *args)
@@ -43,8 +42,6 @@ int create_threads(t_args *args)
 	{
 		philo = (void*)(&args->philos[i]);
 		if (pthread_create(&thread, NULL, &philo_routine, philo))
-			return (0);
-		if (pthread_detach(thread))
 			return (0);
 		usleep(500);
 		i++;

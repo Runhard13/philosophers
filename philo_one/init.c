@@ -71,7 +71,8 @@ int create_mutexes(t_args *args)
 		pthread_mutex_init(&args->forks[i], NULL);
 		i++;
 	}
-	pthread_mutex_init(&args->who_dead, NULL);
-	pthread_mutex_init(&args->who_write, NULL);
+	pthread_mutex_init(&args->waiting_for_death, NULL);
+	pthread_mutex_lock(&args->waiting_for_death);
+	pthread_mutex_init(&args->write_mutex, NULL);
 	return (1);
 }
