@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/07 21:18:26 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 18:45:25 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main (int ac, char **av)
 		return(print_error("Invalid arguments\n"));
 	if (!create_mutexes(&args))
 		return (print_error("Mutex creation failed\n"));
-	if (!create_threads(args))
+	if (!create_threads(&args))
 		return (print_error("Mutex creation failed\n"));
 }

@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/07 22:41:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 18:45:25 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ void print_action(int c)
 		write(1, "is thinking\n", 12);
 }
 
-void spamming(t_args *args, int c)
+void printer(t_args *args, int c)
 {
 	char *index;
 
-	pthread_mutex_lock(&args->philos->who_write);
-	index = ft_itoa(args->philos->index +1);
+	pthread_mutex_lock(&args->who_write);
+	index = ft_itoa(args->philos->index + 1);
 	print_time(args);
 	write(1, " ", 1);
 	write(1, index, ft_strlen(index));
 	write(1, " ", 1);
 	print_action(c);
-	pthread_mutex_unlock(&args->philos->who_write);
+	free(index);
+	pthread_mutex_unlock(&args->who_write);
 }

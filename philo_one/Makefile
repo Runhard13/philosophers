@@ -6,7 +6,7 @@
 #    By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/06 13:14:41 by cdrennan          #+#    #+#              #
-#    Updated: 2021/03/06 15:30:31 by cdrennan         ###   ########.fr        #
+#    Updated: 2021/03/08 18:44:49 by cdrennan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 
-all: $(NAME)
+args: $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -35,6 +35,6 @@ clean:
 fclean: clean
 	rm -f ${NAME}
 
-re: fclean all
+re: fclean args
 
-.PHONY: all clean fclean re
+.PHONY: args clean fclean re

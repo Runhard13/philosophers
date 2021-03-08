@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/07 22:34:43 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/08 19:06:05 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef struct		s_philo
 	int				index;
 	int 			eat_counter;
 	long 			last_eat;
-	pthread_mutex_t	who_write;
-	pthread_mutex_t	who_dead;
+	int 			left_fork;
+	int 			right_fork;
+	long 			death;
+
 
 }					t_philo;
 
@@ -44,8 +46,8 @@ typedef struct		s_args
 	int				num_must_eat;
 	pthread_mutex_t	*forks;
 	long 			t_start;
-	int 			left_fork;
-	int 			right_fork;
+	pthread_mutex_t	who_write;
+	pthread_mutex_t	who_dead;
 	t_philo			*philos;
 }					t_args;
 
@@ -59,6 +61,11 @@ int					ft_atoi(const char *str);
 int					print_error(char *text);
 int					create_threads(t_args *args);
 char				*ft_itoa(long n);
+void				printer(t_args *args, int c);
+void				take_fork(t_args *args);
+void				sleeping(t_args *args);
+void				thinking(t_args *args);
+void				eat(t_args *args);
 
 
 
