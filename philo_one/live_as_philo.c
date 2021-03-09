@@ -12,16 +12,15 @@
 
 #include "philo_one.h"
 
-void take_fork(t_philo *philos)
+void	take_fork(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->args->forks[philos->left_fork]);
 	printer(philos, FORK);
 	pthread_mutex_lock(&philos->args->forks[philos->right_fork]);
 	printer(philos, FORK);
-
 }
 
-void sleeping(t_philo *philos)
+void	sleeping(t_philo *philos)
 {
 	printer(philos, SLEEPING);
 	pthread_mutex_unlock(&philos->args->forks[philos->left_fork]);
@@ -29,12 +28,12 @@ void sleeping(t_philo *philos)
 	usleep(philos->args->t_to_sleep * 1000);
 }
 
-void thinking(t_philo *philos)
+void	thinking(t_philo *philos)
 {
 	printer(philos, THINKING);
 }
 
-void eat(t_philo *philos)
+void	eat(t_philo *philos)
 {
 	pthread_mutex_lock(&philos->eat_or_die);
 	philos->eating = 1;

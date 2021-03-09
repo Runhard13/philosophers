@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:09:05 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/09 21:38:21 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 22:50:06 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-size_t ft_strlen (const char *str)
+size_t	ft_strlen(const char *str)
 {
 	int i;
 
@@ -22,7 +22,7 @@ size_t ft_strlen (const char *str)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
 	size_t	result;
 	int		i;
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str)
 	result = 0;
 	pos = 1;
 	while ((str[i] == ' ') || (str[i] == '\v') || (str[i] == '\t') ||
-		   (str[i] == '\f') || (str[i] == '\r') || (str[i] == '\n'))
+	(str[i] == '\f') || (str[i] == '\r') || (str[i] == '\n'))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
@@ -51,7 +51,7 @@ int	ft_atoi(const char *str)
 		return (-result);
 }
 
-char		*ft_itoa(long n)
+char	*ft_itoa(long n)
 {
 	int		len;
 	char	*str;
@@ -80,17 +80,17 @@ char		*ft_itoa(long n)
 	return (str);
 }
 
-long get_time (void)
+long	get_time(void)
 {
-	struct timeval tv;
-	long time;
+	struct timeval	tv;
+	long			time;
 
 	gettimeofday(&tv, NULL);
 	time = 1000 * tv.tv_sec + tv.tv_usec / 1000;
 	return (time);
 }
 
-void free_all(t_args *args)
+void	free_all(t_args *args)
 {
 	int	i;
 
@@ -105,6 +105,4 @@ void free_all(t_args *args)
 	free(args->forks);
 	free(args->philos);
 	pthread_mutex_destroy(&args->waiting_for_end);
-	i = 0;
-
 }

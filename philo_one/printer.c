@@ -12,23 +12,24 @@
 
 #include "philo_one.h"
 
-int print_error (char *text)
+int		print_error(char *text)
 {
 	write(1, text, ft_strlen(text));
 	return (0);
 }
 
-void print_time(t_philo *philos)
+void	print_time(t_philo *philos)
 {
 	char *time_stamp;
 
 	time_stamp = NULL;
-	time_stamp = ft_itoa((get_time() - philos->args->t_start));
+	if (!(time_stamp = ft_itoa((get_time() - philos->args->t_start))))
+		print_error("Malloc_error");
 	write(1, time_stamp, ft_strlen(time_stamp));
 	free(time_stamp);
 }
 
-void print_action(int c)
+void	print_action(int c)
 {
 	if (c == EATING)
 		write(1, "is eating\n", 10);
@@ -42,18 +43,18 @@ void print_action(int c)
 		write(1, "is thinking\n", 12);
 	else if (c == FED)
 		write(1, "All philopohers fed\n", 20);
-
 }
 
-void printer(t_philo *philos, int c)
+void	printer(t_philo *philos, int c)
 {
-	char *index;
-	static int stop = 0;
+	char		*index;
+	static int	stop = 0;
 
 	pthread_mutex_lock(&philos->args->write_mutex);
 	if (stop != 1)
 	{
-		index = ft_itoa(philos->index + 1);
+		if (!(index = ft_itoa(philos->index + 1)))
+			print_error("Malloc_error");
 		print_time(philos);
 		write(1, "   ", 3);
 		if (c != FED)
