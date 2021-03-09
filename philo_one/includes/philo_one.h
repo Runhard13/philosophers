@@ -70,6 +70,7 @@ void				take_fork(t_philo *philos);
 void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
+void				free_all(t_args *args);
 
 
 

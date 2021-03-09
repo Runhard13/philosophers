@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 21:11:45 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 21:56:24 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int parse_args(t_args *args, char **av, int ac)
 	args->t_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		args->num_must_eat = ft_atoi(av[5]);
+	if (args->t_to_die < 60 || args->t_to_eat < 60 || args->t_to_sleep < 60 || args->num_of_philos > 200)
+		return (0);
 	if (!(args->philos = (t_philo *)malloc(sizeof(t_philo) * args->num_of_philos)))
 		return (0);
 	i = 0;

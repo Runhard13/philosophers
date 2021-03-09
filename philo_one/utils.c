@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:09:05 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 18:44:49 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 21:38:21 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,23 @@ long get_time (void)
 	gettimeofday(&tv, NULL);
 	time = 1000 * tv.tv_sec + tv.tv_usec / 1000;
 	return (time);
+}
+
+void free_all(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->num_of_philos)
+	{
+		pthread_mutex_destroy(&args->forks[i]);
+		pthread_mutex_destroy(&args->philos[i].eat_mutex);
+		pthread_mutex_destroy(&args->philos[i].eat_or_die);
+		i++;
+	}
+	free(args->forks);
+	free(args->philos);
+	pthread_mutex_destroy(&args->waiting_for_end);
+	i = 0;
+
 }

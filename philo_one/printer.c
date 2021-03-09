@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/09 00:47:30 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 21:19:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,21 @@ void print_action(int c)
 void printer(t_philo *philos, int c)
 {
 	char *index;
+	static int stop = 0;
 
 	pthread_mutex_lock(&philos->args->write_mutex);
-	index = ft_itoa(philos->index + 1);
-	print_time(philos);
-	write(1, "   ", 3);
-	if (c != FED)
-		write(1, index, ft_strlen(index));
-	write(1, " ", 1);
-	print_action(c);
-	free(index);
+	if (stop != 1)
+	{
+		index = ft_itoa(philos->index + 1);
+		print_time(philos);
+		write(1, "   ", 3);
+		if (c != FED)
+			write(1, index, ft_strlen(index));
+		write(1, " ", 1);
+		print_action(c);
+		if (c == DIED || c == FED)
+			stop = 1;
+		free(index);
+	}
 	pthread_mutex_unlock(&philos->args->write_mutex);
 }

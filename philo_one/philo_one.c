@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/08 22:29:56 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/09 21:44:30 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main (int ac, char **av)
 		return (print_error("Mutex creation failed\n"));
 	pthread_mutex_lock(&args.waiting_for_end);
 	pthread_mutex_unlock(&args.waiting_for_end);
+	free_all(&args);
 	return (0);
 
 }

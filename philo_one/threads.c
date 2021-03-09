@@ -66,6 +66,7 @@ void *philo_routine(void *args)
 	philos->last_eat = get_time();
 	philos->death = philos->last_eat + philos->args->t_to_die;
 	pthread_create(&thread, NULL, &waiting_for_death, philos);
+	pthread_detach(thread);
 
 	while (1)
 	{
@@ -89,11 +90,13 @@ int create_threads(t_args *args)
 	thread = 0;
 	if (args->num_must_eat > 0)
 		pthread_create(&thread, NULL, &waiting_for_fed, (void*)args);
+	pthread_detach(thread);
 	while (i < args->num_of_philos)
 	{
 		philo = (void*)(&args->philos[i]);
 		if (pthread_create(&thread, NULL, &philo_routine, philo))
 			return (0);
+		pthread_detach(thread);
 		usleep(100);
 		i++;
 	}
