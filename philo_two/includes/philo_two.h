@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/09 23:48:46 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/10 19:06:35 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ typedef struct		s_philo
 	int				eat_counter;
 	long			death;
 	long			last_eat;
-	int				left_fork;
-	int				right_fork;
 	sem_t			*eat_or_die;
 	sem_t			*eat_sem;
 	struct s_args	*args;
@@ -51,7 +49,7 @@ typedef struct		s_args
 	int				num_must_eat;
 	long			t_start;
 	sem_t			*forks;
-	sem_t			*write_mutex;
+	sem_t			*sem_for_write;
 	sem_t			*waiting_for_end;
 	t_philo			*philos;
 }					t_args;
@@ -70,4 +68,5 @@ void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
 void				free_all(t_args *args);
+char				*ft_strjoin(char const *s1, char const *s2);
 #endif

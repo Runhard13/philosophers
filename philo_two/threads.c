@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/09 22:53:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/10 19:37:10 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ void	*waiting_for_death(void *args)
 	philos = (t_philo*)args;
 	while (1)
 	{
-		pthread_mutex_lock(&philos->eat_or_die);
+		sem_wait(philos->eat_or_die);
 		if (get_time() > philos->death && !philos->eating)
 		{
 			printer(philos, DIED);
-			pthread_mutex_unlock(&philos->eat_or_die);
-			pthread_mutex_unlock(&philos->args->waiting_for_end);
+			sem_post(philos->args->waiting_for_end);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philos->eat_or_die);
+		sem_post(philos->eat_or_die);
 		usleep(800);
 	}
 }
@@ -45,13 +44,13 @@ void	*waiting_for_fed(void *ar)
 		i = 0;
 		while (i < args->num_of_philos)
 		{
-			pthread_mutex_lock(&args->philos[i].eat_mutex);
+			sem_post(args->philos->eat_sem);
 			i++;
 		}
 		philos_fed++;
 	}
 	printer(&args->philos[0], FED);
-	pthread_mutex_unlock(&args->waiting_for_end);
+	sem_post(args->waiting_for_end);
 	return (NULL);
 }
 
@@ -84,10 +83,10 @@ int		create_threads(t_args *args)
 	args->t_start = get_time();
 	i = 0;
 	thread = 0;
-	if (args->num_must_eat > 0)
-		if (pthread_create(&thread, NULL, &waiting_for_fed, (void*)args))
-			return (0);
-	pthread_detach(thread);
+//	if (args->num_must_eat > 0)
+//		if (pthread_create(&thread, NULL, &waiting_for_fed, (void*)args))
+//			return (0);
+//	pthread_detach(thread);
 	while (i < args->num_of_philos)
 	{
 		philo = (void*)(&args->philos[i]);

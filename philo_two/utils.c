@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:09:05 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/09 22:50:06 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/10 19:49:05 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,23 @@ long	get_time(void)
 
 void	free_all(t_args *args)
 {
-	int	i;
+	int		i;
+	char *name;
+	char *index;
 
+	sem_unlink("ForksSemaphore");
+	sem_unlink("WriteSemaphore");
+	sem_unlink("WaitingForEnDSemaphore");
 	i = 0;
 	while (i < args->num_of_philos)
 	{
-		pthread_mutex_destroy(&args->forks[i]);
-		pthread_mutex_destroy(&args->philos[i].eat_mutex);
-		pthread_mutex_destroy(&args->philos[i].eat_or_die);
+		index = ft_itoa(i);
+		name = ft_strjoin("eat_or_die", index);
+		sem_unlink(name);
+		free(index);
+		free(name);
 		i++;
 	}
-	free(args->forks);
 	free(args->philos);
-	pthread_mutex_destroy(&args->waiting_for_end);
 }
+
