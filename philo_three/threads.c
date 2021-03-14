@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 19:31:39 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:10:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	*waiting_for_death(void *args)
 		if (get_time() > philos->death && !philos->eating)
 		{
 			printer(philos, DIED);
+			sem_post(philos->eat_or_die);
 			sem_post(philos->args->waiting_for_end);
 			return (NULL);
 		}
 		sem_post(philos->eat_or_die);
+		usleep(800);
 	}
 }
 
@@ -50,12 +52,11 @@ void	*waiting_for_fed(void *ar)
 	return (NULL);
 }
 
-void	*philo_routine(void *args)
+void	*philo_routine(t_philo *philos)
 {
-	t_philo		*philos;
 	pthread_t	thread;
 
-	philos = (t_philo*)args;
+	thread = 0;
 	philos->last_eat = get_time();
 	philos->death = philos->last_eat + philos->args->t_to_die;
 	if (pthread_create(&thread, NULL, &waiting_for_death, philos))
@@ -72,24 +73,36 @@ void	*philo_routine(void *args)
 
 int		create_threads(t_args *args)
 {
-	int			i;
 	pthread_t	thread;
-	void		*philo;
 
-	args->t_start = get_time();
-	i = 0;
 	thread = 0;
 	if (args->num_must_eat > 0)
+	{
 		if (pthread_create(&thread, NULL, &waiting_for_fed, (void*)args))
 			return (0);
-	pthread_detach(thread);
+		pthread_detach(thread);
+	}
+	return (1);
+}
+
+int		start(t_args *args)
+{
+	int		i;
+
+	i = 0;
+	args->t_start = get_time();
 	while (i < args->num_of_philos)
 	{
-		philo = (void*)(&args->philos[i]);
-		if (pthread_create(&thread, NULL, &philo_routine, philo))
+		args->philos[i].pid = fork();
+		if (args->philos[i].pid < 0)
 			return (0);
-		pthread_detach(thread);
-		usleep(100);
+		else if (args->philos[i].pid == 0)
+		{
+			philo_routine(&args->philos[i]);
+			exit(0);
+		}
+		else
+			usleep(100);
 		i++;
 	}
 	return (1);

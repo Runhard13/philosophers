@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 19:45:06 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 19:51:05 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	create_semaphores(t_args *args)
 	if ((args->waiting_for_end = ft_sem_open("WaitingForEnDSemaphore", 0)) == SEM_FAILED)
 		return (0);
 	if ((args->forks = ft_sem_open("ForksSemaphore", args->num_of_philos)) == SEM_FAILED)
+		return (0);
+	if ((args->write_for_dead = ft_sem_open("WriteForDead", 1)) == SEM_FAILED)
 		return (0);
 	return (1);
 }

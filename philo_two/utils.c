@@ -93,7 +93,8 @@ long	get_time(void)
 void	free_all(t_args *args)
 {
 	int		i;
-	char *name;
+	char *name1;
+	char *name2;
 	char *index;
 
 	sem_unlink("ForksSemaphore");
@@ -103,10 +104,15 @@ void	free_all(t_args *args)
 	while (i < args->num_of_philos)
 	{
 		index = ft_itoa(i);
-		name = ft_strjoin("eat_or_die", index);
-		sem_unlink(name);
+		name1 = ft_strjoin("eat_or_die", index);
+		name2 = ft_strjoin("eat_count", index);
+		if (!index || !name1 || !name2)
+			print_error("Malloc error");
+		sem_unlink(name1);
+		sem_unlink(name2);
 		free(index);
-		free(name);
+		free(name1);
+		free(name2);
 		i++;
 	}
 	free(args->philos);

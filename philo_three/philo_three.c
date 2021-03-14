@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:02:02 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_args args;
+	int i;
 
 	if (ac < 5 || ac > 6)
 		return (print_error("Wrong arguments number\n"));
@@ -24,7 +25,12 @@ int	main(int ac, char **av)
 		return (print_error("Semaphore creation failed\n"));
 	if (!create_threads(&args))
 		return (print_error("Thread creation failed\n"));
+	if (!start(&args))
+		return (print_error("Simulation start failed\n"));
 	sem_wait(args.waiting_for_end);
+	i = 0;
+	while (i < args.num_of_philos)
+		kill(args.philos[i++].pid, SIGKILL);
 	free_all(&args);
 	return (0);
 }

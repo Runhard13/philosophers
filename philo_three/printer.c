@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:19:43 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	printer(t_philo *philos, int c)
 	static int	stop = 0;
 
 	sem_wait(philos->args->sem_for_write);
+	sem_wait(philos->args->write_for_dead);
 	if (stop != 1)
 	{
 		if (!(index = ft_itoa(philos->index + 1)))
@@ -63,6 +64,8 @@ void	printer(t_philo *philos, int c)
 		print_action(c);
 		if (c == DIED || c == FED)
 			stop = 1;
+		else
+			sem_post(philos->args->write_for_dead);
 		free(index);
 	}
 	sem_post(philos->args->sem_for_write);

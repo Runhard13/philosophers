@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 20:30:23 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <semaphore.h>
-# include <fcntl.h>
+# include <signal.h>
 
 # define EATING 1
 # define THINKING 2
@@ -38,6 +38,7 @@ typedef struct		s_philo
 	long			last_eat;
 	sem_t			*eat_or_die;
 	sem_t			*eat_sem;
+	pid_t 			pid;
 	struct s_args	*args;
 }					t_philo;
 
@@ -51,6 +52,7 @@ typedef struct		s_args
 	long			t_start;
 	sem_t			*forks;
 	sem_t			*sem_for_write;
+	sem_t			*write_for_dead;
 	sem_t			*waiting_for_end;
 	t_philo			*philos;
 }					t_args;
@@ -71,4 +73,5 @@ void				eat(t_philo *philos);
 void				free_all(t_args *args);
 char				*ft_strjoin(char const *s1, char const *s2);
 sem_t				*ft_sem_open(char *name, int value);
+int					start(t_args *args);
 #endif
