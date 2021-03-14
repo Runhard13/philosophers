@@ -46,3 +46,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ptr[(t1 + t2)] = '\0';
 	return (ptr);
 }
+
+sem_t  *ft_sem_open(char *name, int value)
+{
+	sem_unlink(name);
+	return(sem_open(name, O_CREAT | O_EXCL, 644, value));
+}

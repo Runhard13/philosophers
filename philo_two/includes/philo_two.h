@@ -19,6 +19,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 # include <semaphore.h>
+# include <fcntl.h>
 
 # define EATING 1
 # define THINKING 2
@@ -69,4 +70,5 @@ void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
 void				free_all(t_args *args);
 char				*ft_strjoin(char const *s1, char const *s2);
+sem_t				*ft_sem_open(char *name, int value);
 #endif

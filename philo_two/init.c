@@ -37,8 +37,8 @@ int	check_args(char **av)
 int	init_stuff(t_args *args)
 {
 	int i;
-	char *name;
 	char *index;
+	char *name;
 
 	i = 0;
 	while (i < args->num_of_philos)
@@ -49,7 +49,7 @@ int	init_stuff(t_args *args)
 		args->philos[i].eating = 0;
 		index = ft_itoa(i);
 		name = ft_strjoin("eat_or_die", index);
-		args->philos[i].eat_or_die = sem_open(name, O_CREAT, O_EXCL, 0644, 1);
+		args->philos[i].eat_or_die = ft_sem_open(name, 1);
 		free(index);
 		free(name);
 		i++;
@@ -67,6 +67,8 @@ int	parse_args(t_args *args, char **av, int ac)
 	args->t_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		args->num_must_eat = ft_atoi(av[5]);
+	else
+		args->num_must_eat = 0;
 	if (args->t_to_die < 60 || args->t_to_eat
 	< 60 || args->t_to_sleep < 60 || args->num_of_philos > 200)
 		return (0);
@@ -80,11 +82,8 @@ int	parse_args(t_args *args, char **av, int ac)
 
 int	create_semaphores(t_args *args)
 {
-	args->sem_for_write = sem_open("WriteSemaphore", O_CREAT, O_EXCL, 0644, 1);
-	printf("sem_for_write - Errno = %d\n", errno);
-	args->waiting_for_end = sem_open("WaitingForEnDSemaphore", O_CREAT, O_EXCL, 0644, 0);
-	printf("waiting_for_end - Errno = %d\n", errno);
-	args->forks = sem_open("ForksSemaphore", O_CREAT, O_EXCL, 0644, args->num_of_philos);
-	printf("ForksSemaphore - Errno = %d\n", errno);
+	args->sem_for_write = ft_sem_open("WriteSemaphore", 1);
+	args->waiting_for_end = ft_sem_open("WaitingForEnDSemaphore", 0);
+	args->forks = ft_sem_open("ForksSemaphore", args->num_of_philos);
 	return (1);
 }

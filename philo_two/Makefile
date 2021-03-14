@@ -12,9 +12,9 @@
 
 NAME	= philo_two
 
-CC		= clang
+CC		= gcc
 
-CFLAGS	= -Wall -Wextra -Werror $(INC)
+CFLAGS	= -Wall -Wextra -Werror $(INC) -lpthread
 
 INC		= -Iincludes/
 

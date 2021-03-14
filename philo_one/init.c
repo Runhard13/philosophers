@@ -66,6 +66,8 @@ int	parse_args(t_args *args, char **av, int ac)
 	args->t_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		args->num_must_eat = ft_atoi(av[5]);
+	else
+		args->num_must_eat = 0;
 	if (args->t_to_die < 60 || args->t_to_eat
 	< 60 || args->t_to_sleep < 60 || args->num_of_philos > 200)
 		return (0);
