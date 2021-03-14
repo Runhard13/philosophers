@@ -27,7 +27,7 @@ void	*waiting_for_death(void *args)
 			return (NULL);
 		}
 		sem_post(philos->eat_or_die);
-		usleep (800);
+		usleep(800);
 	}
 }
 

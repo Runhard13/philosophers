@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 20:30:23 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:17:41 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct		s_philo
 	long			last_eat;
 	sem_t			*eat_or_die;
 	sem_t			*eat_sem;
-	pid_t 			pid;
+	pid_t			pid;
 	struct s_args	*args;
 }					t_philo;
 

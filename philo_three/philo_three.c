@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:25:30 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 21:02:02 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:02:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int ac, char **av)
 {
-	t_args args;
-	int i;
+	t_args	args;
+	int		i;
 
 	if (ac < 5 || ac > 6)
 		return (print_error("Wrong arguments number\n"));

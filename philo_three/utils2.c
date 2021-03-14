@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 23:26:57 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:41:27 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void		*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char		*d;
 	const char	*s;
@@ -47,8 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-sem_t  *ft_sem_open(char *name, int value)
+sem_t	*ft_sem_open(char *name, int value)
 {
 	sem_unlink(name);
-	return(sem_open(name, O_CREAT | O_EXCL, 644, value));
+	return (sem_open(name, O_CREAT | O_EXCL, 644, value));
 }

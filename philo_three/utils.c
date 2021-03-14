@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:09:05 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 19:51:05 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 21:40:05 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ long	get_time(void)
 void	free_all(t_args *args)
 {
 	int		i;
-	char *name1;
-	char *name2;
-	char *index;
+	char	*name1;
+	char	*name2;
+	char	*index;
 
 	sem_unlink("ForksSemaphore");
 	sem_unlink("WriteSemaphore");
@@ -117,4 +117,3 @@ void	free_all(t_args *args)
 	}
 	free(args->philos);
 }
-

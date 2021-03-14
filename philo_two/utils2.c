@@ -12,7 +12,7 @@
 
 #include "philo_two.h"
 
-void		*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char		*d;
 	const char	*s;
@@ -47,8 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-sem_t  *ft_sem_open(char *name, int value)
+sem_t	*ft_sem_open(char *name, int value)
 {
 	sem_unlink(name);
-	return(sem_open(name, O_CREAT | O_EXCL, 644, value));
+	return (sem_open(name, O_CREAT | O_EXCL, 644, value));
 }

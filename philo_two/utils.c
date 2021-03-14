@@ -93,9 +93,9 @@ long	get_time(void)
 void	free_all(t_args *args)
 {
 	int		i;
-	char *name1;
-	char *name2;
-	char *index;
+	char	*name1;
+	char	*name2;
+	char	*index;
 
 	sem_unlink("ForksSemaphore");
 	sem_unlink("WriteSemaphore");
@@ -117,4 +117,3 @@ void	free_all(t_args *args)
 	}
 	free(args->philos);
 }
-
