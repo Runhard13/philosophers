@@ -6,11 +6,12 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 19:45:06 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
+#include <errno.h>
 
 int	check_args(char **av)
 {
@@ -36,21 +37,29 @@ int	check_args(char **av)
 int	init_stuff(t_args *args)
 {
 	int i;
+	char *index;
+	char *name1;
+	char *name2;
 
 	i = 0;
 	while (i < args->num_of_philos)
 	{
 		args->philos[i].index = i;
 		args->philos[i].eat_counter = 0;
-		args->philos[i].left_fork = i;
-		args->philos[i].right_fork = (i + 1) % args->num_of_philos;
 		args->philos[i].args = args;
 		args->philos[i].eating = 0;
-		if (pthread_mutex_init(&args->philos[i].eat_or_die, NULL))
+		index = ft_itoa(i);
+		name1 = ft_strjoin("eat_or_die", index);
+		name2 = ft_strjoin("eat_count", index);
+		if (!index || !name1 || !name2)
 			return (0);
-		if (pthread_mutex_init(&args->philos[i].eat_mutex, NULL))
+		if ((args->philos[i].eat_or_die = ft_sem_open(name1, 1)) == SEM_FAILED)
 			return (0);
-		pthread_mutex_lock(&args->philos[i].eat_mutex);
+		if ((args->philos[i].eat_sem = ft_sem_open(name1, 0)) == SEM_FAILED)
+			return (0);
+		free(index);
+		free(name1);
+		free(name2);
 		i++;
 	}
 	return (1);
@@ -79,24 +88,13 @@ int	parse_args(t_args *args, char **av, int ac)
 	return (1);
 }
 
-int	create_mutexes(t_args *args)
+int	create_semaphores(t_args *args)
 {
-	int i;
-
-	i = 0;
-	if (!(args->forks = (pthread_mutex_t *)
-	malloc(sizeof(pthread_mutex_t) * args->num_of_philos)))
+	if ((args->sem_for_write = ft_sem_open("WriteSemaphore", 1)) == SEM_FAILED)
 		return (0);
-	while (i < args->num_of_philos)
-	{
-		if (pthread_mutex_init(&args->forks[i], NULL))
-			return (0);
-		i++;
-	}
-	if (pthread_mutex_init(&args->waiting_for_end, NULL))
+	if ((args->waiting_for_end = ft_sem_open("WaitingForEnDSemaphore", 0)) == SEM_FAILED)
 		return (0);
-	pthread_mutex_lock(&args->waiting_for_end);
-	if (pthread_mutex_init(&args->write_mutex, NULL))
+	if ((args->forks = ft_sem_open("ForksSemaphore", args->num_of_philos)) == SEM_FAILED)
 		return (0);
 	return (1);
 }

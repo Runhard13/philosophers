@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
 int		print_error(char *text)
 {
@@ -50,7 +50,7 @@ void	printer(t_philo *philos, int c)
 	char		*index;
 	static int	stop = 0;
 
-	pthread_mutex_lock(&philos->args->write_mutex);
+	sem_wait(philos->args->sem_for_write);
 	if (stop != 1)
 	{
 		if (!(index = ft_itoa(philos->index + 1)))
@@ -65,5 +65,5 @@ void	printer(t_philo *philos, int c)
 			stop = 1;
 		free(index);
 	}
-	pthread_mutex_unlock(&philos->args->write_mutex);
+	sem_post(philos->args->sem_for_write);
 }

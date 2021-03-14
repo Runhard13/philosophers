@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/13 18:42:59 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/14 19:45:06 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	init_stuff(t_args *args)
 {
 	int i;
 	char *index;
-	char *name;
+	char *name1;
+	char *name2;
 
 	i = 0;
 	while (i < args->num_of_philos)
@@ -48,10 +49,17 @@ int	init_stuff(t_args *args)
 		args->philos[i].args = args;
 		args->philos[i].eating = 0;
 		index = ft_itoa(i);
-		name = ft_strjoin("eat_or_die", index);
-		args->philos[i].eat_or_die = ft_sem_open(name, 1);
+		name1 = ft_strjoin("eat_or_die", index);
+		name2 = ft_strjoin("eat_count", index);
+		if (!index || !name1 || !name2)
+			return (0);
+		if ((args->philos[i].eat_or_die = ft_sem_open(name1, 1)) == SEM_FAILED)
+			return (0);
+		if ((args->philos[i].eat_sem = ft_sem_open(name1, 0)) == SEM_FAILED)
+			return (0);
 		free(index);
-		free(name);
+		free(name1);
+		free(name2);
 		i++;
 	}
 	return (1);
@@ -82,8 +90,11 @@ int	parse_args(t_args *args, char **av, int ac)
 
 int	create_semaphores(t_args *args)
 {
-	args->sem_for_write = ft_sem_open("WriteSemaphore", 1);
-	args->waiting_for_end = ft_sem_open("WaitingForEnDSemaphore", 0);
-	args->forks = ft_sem_open("ForksSemaphore", args->num_of_philos);
+	if ((args->sem_for_write = ft_sem_open("WriteSemaphore", 1)) == SEM_FAILED)
+		return (0);
+	if ((args->waiting_for_end = ft_sem_open("WaitingForEnDSemaphore", 0)) == SEM_FAILED)
+		return (0);
+	if ((args->forks = ft_sem_open("ForksSemaphore", args->num_of_philos)) == SEM_FAILED)
+		return (0);
 	return (1);
 }

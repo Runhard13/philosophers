@@ -10,14 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 # define EATING 1
 # define THINKING 2
@@ -34,10 +36,8 @@ typedef struct		s_philo
 	int				eat_counter;
 	long			death;
 	long			last_eat;
-	int				left_fork;
-	int				right_fork;
-	pthread_mutex_t eat_or_die;
-	pthread_mutex_t eat_mutex;
+	sem_t			*eat_or_die;
+	sem_t			*eat_sem;
 	struct s_args	*args;
 }					t_philo;
 
@@ -48,15 +48,15 @@ typedef struct		s_args
 	int				t_to_eat;
 	int				t_to_sleep;
 	int				num_must_eat;
-	pthread_mutex_t	*forks;
 	long			t_start;
-	pthread_mutex_t	write_mutex;
-	pthread_mutex_t	waiting_for_end;
+	sem_t			*forks;
+	sem_t			*sem_for_write;
+	sem_t			*waiting_for_end;
 	t_philo			*philos;
 }					t_args;
 int					check_args(char **av);
 int					parse_args(t_args *args, char **av, int ac);
-int					create_mutexes (t_args *args);
+int					create_semaphores(t_args *args);
 long				get_time(void);
 size_t				ft_strlen(const char *str);
 int					ft_atoi(const char *str);
@@ -69,4 +69,6 @@ void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
 void				free_all(t_args *args);
+char				*ft_strjoin(char const *s1, char const *s2);
+sem_t				*ft_sem_open(char *name, int value);
 #endif

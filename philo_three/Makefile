@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= philo_one
+NAME	= philo_three
 
-CC		= clang
+CC		= gcc
 
 CFLAGS	= -Wall -Wextra -Werror $(INC)
 
@@ -21,7 +21,7 @@ INC		= -Iincludes/
 OBJS	= $(SRCS:%.c=%.o)
 
 
-SRCS	= philo_one.c init.c utils.c threads.c live_as_philo.c printer.c
+SRCS	= philo_three.c init.c utils.c threads.c live_as_philo.c printer.c utils2.c
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
