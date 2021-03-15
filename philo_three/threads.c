@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 21:11:54 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*waiting_for_death(void *args)
 			return (NULL);
 		}
 		sem_post(philos->eat_or_die);
-		usleep(800);
+		ft_usleep(8);
 	}
 }
 
@@ -102,7 +102,7 @@ int		start(t_args *args)
 			exit(0);
 		}
 		else
-			usleep(100);
+			ft_usleep(1);
 		i++;
 	}
 	return (1);

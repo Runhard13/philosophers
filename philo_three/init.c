@@ -6,12 +6,11 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:10:48 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 21:39:14 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
-#include <errno.h>
 
 int	check_args(char **av)
 {

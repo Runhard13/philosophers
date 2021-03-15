@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:45:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:38:34 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sleeping(t_philo *philos)
 	printer(philos, SLEEPING);
 	pthread_mutex_unlock(&philos->args->forks[philos->left_fork]);
 	pthread_mutex_unlock(&philos->args->forks[philos->right_fork]);
-	usleep(philos->args->t_to_sleep * 1000);
+	ft_usleep(philos->args->t_to_sleep);
 }
 
 void	thinking(t_philo *philos)
@@ -40,7 +40,7 @@ void	eat(t_philo *philos)
 	philos->last_eat = get_time();
 	philos->death = philos->args->t_to_die + philos->last_eat;
 	printer(philos, EATING);
-	usleep(philos->args->t_to_eat * 1000);
+	ft_usleep(philos->args->t_to_eat);
 	philos->eating = 0;
 	philos->eat_counter++;
 	pthread_mutex_unlock(&philos->eat_or_die);

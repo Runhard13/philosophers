@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:45:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	sleeping(t_philo *philos)
 	printer(philos, SLEEPING);
 	sem_post(philos->args->forks);
 	sem_post(philos->args->forks);
-	usleep(philos->args->t_to_sleep * 1000);
+	ft_usleep(philos->args->t_to_sleep);
 }
 
 void	thinking(t_philo *philos)
@@ -40,7 +40,7 @@ void	eat(t_philo *philos)
 	philos->last_eat = get_time();
 	philos->death = philos->args->t_to_die + philos->last_eat;
 	printer(philos, EATING);
-	usleep(philos->args->t_to_eat * 1000);
+	ft_usleep(philos->args->t_to_eat);
 	philos->eating = 0;
 	philos->eat_counter++;
 	sem_post(philos->eat_sem);

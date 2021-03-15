@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 22:16:42 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:38:34 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ void	printer(t_philo *philos, int c)
 		free(index);
 	}
 	pthread_mutex_unlock(&philos->args->write_mutex);
+}
+
+void	ft_usleep(int length)
+{
+	long	time;
+
+	time = get_time();
+	while (get_time() < (time + length))
+		usleep(length);
 }

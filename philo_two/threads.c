@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 21:26:21 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 19:31:39 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*waiting_for_death(void *args)
 			return (NULL);
 		}
 		sem_post(philos->eat_or_die);
-		usleep(800);
+		ft_usleep(8);
 	}
 }
 
@@ -62,6 +62,7 @@ void	*philo_routine(void *args)
 	if (pthread_create(&thread, NULL, &waiting_for_death, philos))
 		return (NULL);
 	pthread_detach(thread);
+	philos->index % 2 ? usleep(philos->args->t_to_eat * 0.8) : 0;
 	while (1)
 	{
 		take_fork(philos);
@@ -90,7 +91,7 @@ int		create_threads(t_args *args)
 		if (pthread_create(&thread, NULL, &philo_routine, philo))
 			return (0);
 		pthread_detach(thread);
-		usleep(100);
+		ft_usleep(1);
 		i++;
 	}
 	return (1);

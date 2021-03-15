@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
 void				free_all(t_args *args);
+void				ft_usleep(int length);
 #endif

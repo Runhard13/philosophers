@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 23:26:57 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 18:26:13 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,13 @@ sem_t	*ft_sem_open(char *name, int value)
 {
 	sem_unlink(name);
 	return (sem_open(name, O_CREAT | O_EXCL, 644, value));
+}
+
+void	ft_usleep(int length)
+{
+	long	time;
+
+	time = get_time();
+	while (get_time() < (time + length))
+		usleep(length);
 }

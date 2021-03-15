@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 13:23:40 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/14 21:17:41 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/15 21:56:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void				free_all(t_args *args);
 char				*ft_strjoin(char const *s1, char const *s2);
 sem_t				*ft_sem_open(char *name, int value);
 int					start(t_args *args);
+void				ft_usleep(int length);
 #endif
