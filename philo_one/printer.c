@@ -68,7 +68,7 @@ void	printer(t_philo *philos, int c)
 	pthread_mutex_unlock(&philos->args->write_mutex);
 }
 
-void	ft_usleep(int length)
+void	ft_usleep(long length)
 {
 	long	time;
 

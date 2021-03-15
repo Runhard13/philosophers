@@ -53,7 +53,7 @@ sem_t	*ft_sem_open(char *name, int value)
 	return (sem_open(name, O_CREAT | O_EXCL, 644, value));
 }
 
-void	ft_usleep(int length)
+void	ft_usleep(long length)
 {
 	long	time;
 

@@ -44,9 +44,9 @@ typedef struct		s_philo
 typedef struct		s_args
 {
 	int				num_of_philos;
-	int				t_to_die;
-	int				t_to_eat;
-	int				t_to_sleep;
+	long			t_to_die;
+	long			t_to_eat;
+	long			t_to_sleep;
 	int				num_must_eat;
 	pthread_mutex_t	*forks;
 	long			t_start;
@@ -69,5 +69,5 @@ void				sleeping(t_philo *philos);
 void				thinking(t_philo *philos);
 void				eat(t_philo *philos);
 void				free_all(t_args *args);
-void				ft_usleep(int length);
+void				ft_usleep(long length);
 #endif
